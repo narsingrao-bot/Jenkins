@@ -37,15 +37,13 @@ pipeline {
       steps {
         script {
             sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
-             def registryCredentials = credentials('docker-cred')
-                    withDockerRegistry(credentialsId: 'docker-cred', url: 'https://hub.docker.com') {
+               withDockerRegistry(credentialsId: 'docker-cred', url: 'https://hub.docker.com') {
                         // Login using --password-stdin
-                        sh """echo ${docker-cred} | docker login -u admin668 --password-stdin ${docker-cred}"""
-                          docker push ${DOCKER_IMAGE}
+                        sh """
+                            echo \${DOCKER_PASSWORD} | docker login -u \${DOCKER_USERNAME} --password-stdin \${DOCKER_REGISTRY}
+                        """
+                        docker push ${DOCKER_IMAGE}
                     }
-
-
-
 
           //  def dockerImage = docker.image("${DOCKER_IMAGE}")
           //  docker.withRegistry('https://hub.docker.com', "docker-cred") {
