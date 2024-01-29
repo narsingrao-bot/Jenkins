@@ -53,8 +53,6 @@ sudo apt-get install jenkins
 - Create Firewall Rule
 - Add Firewall traffic rules as shown in the image (you can just allow TCP 8080 as well, in my case, I allowed `All traffic`).
 
-  https://github.com/narsingrao-bot/Jenkins/assets/59975179/98b6c4e0-5f89-4c95-8469-80bbf3a8dac2
-
 
 <img width="1187" alt="Screenshot 2023-02-01 at 12 42 01 PM" src="https://github.com/narsingrao-bot/Jenkins/assets/59975179/98b6c4e0-5f89-4c95-8469-80bbf3a8dac2">
 
@@ -125,8 +123,52 @@ Once you are done with the above steps, it is better to restart Jenkins.
 http://<gcp-instance-public-ip>:8080/restart
 ```
 
-The docker agent configuration is now successful.
+The docker agent configuration is now successful. 
 
+## Now Install the Argocd inside the Kubernetes cluster.
+
+ -Installation Steps.
+ ```
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl get pods -n argocd 
+```
+
+- check the pods are up && running wait for a while so all the pods are up
+
+## Port Forwading
+
+ ```
+C:\Users\Narsing\AppData\Local\Google\Cloud SDK>
+kubectl port-forward svc/argocd-server -n argocd 7070:443
+Forwarding from clusterip:7070 -> 8080
+Forwarding from [::1]:7070 -> 8080
+```
+- Access the port using <https://IP:7070 >
+- By Default username : admin.
+- password will be stored in secret file named argocd-initial-admin-secret.
+- Decode the password based on your opearting system.
+
+ ```
+kubectl get secret argocd-initial-admin-secret -n argocd -o yaml
+echo ekEzMVZkV3********== |base64 --decode for unix system
+powershell -command "[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('ekEzMVZkV3******=='))" for windows system
+```
+- Replace the value ekEzMVZkV3********== with your actual value
+- copy the value and paste in the Password field
+  
+## Now you can access the Argocd web Page.
+
+<img width="1392" alt="Screenshot 2023-02-01 at 12 17 02 PM" src="https://github.com/narsingrao-bot/Jenkins/assets/59975179/0b62f284-65c5-4ee6-bed1-96da1a782c26">
+
+## Once you deploy your project in the ArgoCD this look like this
+
+<img width="1392" alt="Screenshot 2023-02-01 at 12 17 02 PM" src="https://github.com/narsingrao-bot/Jenkins/assets/59975179/a0cbae29-9571-4f70-b76b-4043e65effff">
+
+
+
+
+  
 
 
 
