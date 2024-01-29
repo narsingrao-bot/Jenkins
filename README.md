@@ -2,7 +2,7 @@
 
 Are you looking forward to learn Jenkins right from Zero(installation) to Hero(Build end to end pipelines)? then you are at the right place. 
 
-## Installation on EC2 Instance
+## Installation on GCP Instance
 
 YouTube Video ->
 https://www.youtube.com/watch?v=zZfhAXfBvVA&list=RDCMUCnnQ3ybuyFdzvgv2Ky5jnAA&index=1
@@ -16,9 +16,9 @@ Install Jenkins, configure Docker as agent, set up cicd, deploy applications to 
 ## GCP Compute Engine Instance
 ## Azure Instance
 
-In this Project I have use the Google Cloud Compute Engine Instance
+## In this Project I have use the Google Cloud Compute Engine Instance
 
-- Go to AWS Console
+- Go to GCP Console
 - Instances(running)
 - Launch instances
 
@@ -56,7 +56,7 @@ sudo apt-get update
 sudo apt-get install jenkins
 ```
 
-**Note: ** By default, Jenkins will not be accessible to the external world due to the inbound traffic restriction by AWS. Open port 8080 in the inbound traffic rules as show below.
+**Note: ** By default, Jenkins will not be accessible to the external world due to the inbound traffic restriction by GCP. Open port 8080 in the inbound traffic rules as show below.
 
 - EC2 > Instances > Click on <Instance-ID>
 - In the bottom tabs -> Click on Security
@@ -68,7 +68,7 @@ sudo apt-get install jenkins
 
 ### Login to Jenkins using the below URL:
 
-http://<gcp-instance-public-ip-address>:8080    [You can get the ec2-instance-public-ip-address from your AWS EC2 console page]
+http://<gcp-instance-public-ip-address>:8080    [You can get the GCP-instance-public-ip-address from your Google Cloud==console page]
 
 Note: If you are not interested in allowing `All Traffic` to your gcp compute-engine instance
       1. Delete the inbound traffic rule for your instance
