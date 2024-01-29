@@ -1,28 +1,15 @@
-# Jenkins-Zero-To-Hero
-
-Are you looking forward to learn Jenkins right from Zero(installation) to Hero(Build end to end pipelines)? then you are at the right place. 
 
 ## Installation on GCP Instance
 
-YouTube Video ->
-https://www.youtube.com/watch?v=zZfhAXfBvVA&list=RDCMUCnnQ3ybuyFdzvgv2Ky5jnAA&index=1
+Install Jenkins, configure Docker as agent, set up cicd, deploy applications to GKE Cluster and much more.
 
-
-![Screenshot 2023-02-01 at 5 46 14 PM](https://user-images.githubusercontent.com/43399466/216040281-6c8b89c3-8c22-4620-ad1c-8edd78eb31ae.png)
-
-Install Jenkins, configure Docker as agent, set up cicd, deploy applications to k8s and much more.
-
-## AWS EC2 Instance
 ## GCP Compute Engine Instance
-## Azure Instance
 
 ## In this Project I have use the Google Cloud Compute Engine Instance
 
 - Go to GCP Console
 - Instances(running)
 - Launch instances
-
-  ![image](https://github.com/narsingrao-bot/Jenkins/assets/59975179/d942b545-e084-4ee9-b6a8-fd74fa7bd859)
 
 
 <img width="994" alt="Screenshot 2023-02-01 at 12 37 45 PM" src="https://github.com/narsingrao-bot/Jenkins/assets/59975179/d942b545-e084-4ee9-b6a8-fd74fa7bd859">
@@ -38,7 +25,7 @@ Install Java
 
 ```
 sudo apt update
-sudo apt install openjdk-11-jre
+sudo apt install openjdk-17-jre
 ```
 
 Verify Java is Installed
@@ -59,14 +46,17 @@ sudo apt-get update
 sudo apt-get install jenkins
 ```
 
-**Note: ** By default, Jenkins will not be accessible to the external world due to the inbound traffic restriction by GCP. Open port 8080 in the inbound traffic rules as show below.
+**Note: ** By default, Jenkins will not be accessible to the external world due to the inbound firewall traffic restriction by GCP. Open port 8080 in the inbound traffic rules as show below.
 
-- EC2 > Instances > Click on <Instance-ID>
-- In the bottom tabs -> Click on Security
-- Security groups
-- Add inbound traffic rules as shown in the image (you can just allow TCP 8080 as well, in my case, I allowed `All traffic`).
+- GCP > Instances > Click on <Drop-Down> then Click on <VPC Network>
+- In the DropDown tabs -> Click on Firewall
+- Create Firewall Rule
+- Add Firewall traffic rules as shown in the image (you can just allow TCP 8080 as well, in my case, I allowed `All traffic`).
 
-<img width="1187" alt="Screenshot 2023-02-01 at 12 42 01 PM" src="https://user-images.githubusercontent.com/43399466/215975712-2fc569cb-9d76-49b4-9345-d8b62187aa22.png">
+  https://github.com/narsingrao-bot/Jenkins/assets/59975179/98b6c4e0-5f89-4c95-8469-80bbf3a8dac2
+
+
+<img width="1187" alt="Screenshot 2023-02-01 at 12 42 01 PM" src="https://github.com/narsingrao-bot/Jenkins/assets/59975179/98b6c4e0-5f89-4c95-8469-80bbf3a8dac2">
 
 
 ### Login to Jenkins using the below URL:
@@ -74,8 +64,8 @@ sudo apt-get install jenkins
 http://<gcp-instance-public-ip-address>:8080    [You can get the GCP-instance-public-ip-address from your Google Cloud==console page]
 
 Note: If you are not interested in allowing `All Traffic` to your gcp compute-engine instance
-      1. Delete the inbound traffic rule for your instance
-      2. Edit the inbound traffic rule to only allow custom TCP port `8080`
+      1. Delete the Firewall traffic rule for your instance
+      2. Edit the Firewall traffic rule to only allow custom TCP port `8080`
   
 After you login to Jenkins, 
       - Run the command to copy the Jenkins Admin Password - `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
