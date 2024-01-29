@@ -13,6 +13,10 @@ https://www.youtube.com/watch?v=zZfhAXfBvVA&list=RDCMUCnnQ3ybuyFdzvgv2Ky5jnAA&in
 Install Jenkins, configure Docker as agent, set up cicd, deploy applications to k8s and much more.
 
 ## AWS EC2 Instance
+## GCP Compute Engine Instance
+## Azure Instance
+
+In this Project I have use the Google Cloud Compute Engine Instance
 
 - Go to AWS Console
 - Instances(running)
@@ -64,9 +68,9 @@ sudo apt-get install jenkins
 
 ### Login to Jenkins using the below URL:
 
-http://<ec2-instance-public-ip-address>:8080    [You can get the ec2-instance-public-ip-address from your AWS EC2 console page]
+http://<gcp-instance-public-ip-address>:8080    [You can get the ec2-instance-public-ip-address from your AWS EC2 console page]
 
-Note: If you are not interested in allowing `All Traffic` to your EC2 instance
+Note: If you are not interested in allowing `All Traffic` to your gcp compute-engine instance
       1. Delete the inbound traffic rule for your instance
       2. Edit the inbound traffic rule to only allow custom TCP port `8080`
   
@@ -117,16 +121,15 @@ sudo apt install docker.io
 ### Grant Jenkins user and Ubuntu user permission to docker deamon.
 
 ```
-sudo su - 
-usermod -aG docker jenkins
-usermod -aG docker ubuntu
-systemctl restart docker
+sudo usermod -aG docker jenkins
+sudo usermod -aG docker ubuntu
+sudo systemctl restart docker
 ```
 
 Once you are done with the above steps, it is better to restart Jenkins.
 
 ```
-http://<ec2-instance-public-ip>:8080/restart
+http://<gcp-instance-public-ip>:8080/restart
 ```
 
 The docker agent configuration is now successful.
